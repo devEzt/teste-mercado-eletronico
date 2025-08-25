@@ -1,0 +1,42 @@
+{
+  "name": "teste-mercado-eletronico",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "test:e2e": "cypress open",
+    "commit": "cz"
+  },
+  "dependencies": {
+    "@heroicons/vue": "^2.0.18",
+    "axios": "^1.6.0",
+    "lucide-vue-next": "^0.309.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.6",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/test-utils": "^2.4.1",
+    "autoprefixer": "^10.4.14",
+    "commitizen": "^4.3.1",
+    "cypress": "^12.17.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.45.0",
+    "eslint-plugin-cypress": "^2.13.3",
+    "eslint-plugin-vue": "^9.15.1",
+    "jsdom": "^22.1.0",
+    "postcss": "^8.4.23",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.4.5",
+    "vitest": "^0.34.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
