@@ -13,7 +13,6 @@ export const useOrders = () => {
       loading.value = true
       error.value = null
       
-      // Busca order 1 da API
       let apiOrder = null
       try {
         console.log('Fazendo request para:', `${API_BASE_URL}/orders/1`)
@@ -158,7 +157,7 @@ export const useOrders = () => {
     
     const order = orders.value[orderIndex]
     
-    // Só permite deletar orders mockadas
+    // vamos permitir deletar apenas mockadas
     if (!order.isMock) {
       throw new Error('Pedidos reais não podem ser deletados')
     }
@@ -167,7 +166,6 @@ export const useOrders = () => {
     return true
   }
 
-  // Computed properties
   const ordersCount = computed(() => orders.value.length)
   const hasOrders = computed(() => orders.value.length > 0)
   const realOrders = computed(() => orders.value.filter(order => !order.isMock))
