@@ -1,11 +1,10 @@
 <template>
-  <div class="bg-white rounded-lg shadow overflow-hidden">
-    <!-- Header with gradient background -->
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
     <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="text-sm font-medium opacity-90 mb-1">
-            Pre-Order
+            {{ $t('details.preOrder') }}
           </div>
           <div class="text-2xl md:text-3xl font-bold">
             {{ order.header.number }}
@@ -24,21 +23,20 @@
             :class="statusClasses"
           >
             <component :is="statusIcon" class="w-3 h-3 mr-1" />
-            {{ order.header.status }}
+            {{ displayStatus(order.header.status) }}
           </span>
           <div class="text-xs opacity-75 mt-2">
-            Criado em {{ formatDate(order.header.createdAt) }}
+            {{ $t('details.createdAt', { date: formatDate(order.header.createdAt) }) }}
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Buyer Info Section -->
-    <div class="p-6 bg-gray-50">
-      <h2 class="text-xl font-semibold text-gray-900 mb-4">
+    <div class="p-6 bg-gray-50 dark:bg-gray-900">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
         {{ order.header.buyer }}
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-300">
         <div class="flex items-center gap-2">
           <UserIcon class="w-4 h-4 text-gray-400" />
           {{ order.header.contact?.name }}
@@ -62,6 +60,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { 
   UserIcon, 
   EnvelopeIcon, 
@@ -78,6 +77,8 @@ const props = defineProps({
   }
 })
 
+const { t, locale } = useI18n()
+
 const statusIcon = computed(() => {
   const status = props.order.header.status?.toLowerCase()
   if (status === 'confirmed') return CheckCircleIcon
@@ -87,18 +88,27 @@ const statusIcon = computed(() => {
 
 const statusClasses = computed(() => {
   const status = props.order.header.status?.toLowerCase()
-  if (status === 'confirmed') return 'bg-green-100 text-green-800'
-  if (status === 'shipped') return 'bg-blue-100 text-blue-800'
-  return 'bg-yellow-100 text-yellow-800'
+  if (status === 'confirmed') return 'bg-green-100 text-green-800 dark:bg-green-500 dark:text-green-900'
+  if (status === 'shipped') return 'bg-blue-100 text-blue-800 dark:bg-blue-500 dark:text-blue-900'
+  return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500 dark:text-yellow-900'
 })
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleString('pt-BR', {
+  return new Date(dateString).toLocaleString(locale.value || 'pt-BR', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
   })
+}
+
+const displayStatus = (status) => {
+  if (!status) return ''
+  const s = status.toLowerCase()
+  if (s === 'confirmed') return t('status.confirmed')
+  if (s === 'shipped') return t('status.shipped')
+  if (s.includes('confirm')) return t('status.needConfirm')
+  return status
 }
 </script>

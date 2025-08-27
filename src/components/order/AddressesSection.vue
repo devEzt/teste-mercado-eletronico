@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white rounded-lg shadow overflow-hidden">
-    <div class="px-6 py-4 border-b border-gray-200">
+  <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
       <div class="flex items-center">
         <div class="p-2 rounded-lg bg-blue-100 text-blue-600 mr-3">
           <MapPinIcon class="h-5 w-5" />
         </div>
-        <h3 class="text-lg font-medium text-gray-900">Endereços</h3>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">{{ $t('labels.addresses') }}</h3>
       </div>
     </div>
     
