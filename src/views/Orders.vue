@@ -1,8 +1,17 @@
 <template>
   <div>
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900">Meus Pedidos</h1>
-      <p class="text-gray-600 mt-1">Lista completa dos seus pedidos</p>
+    <div class="mb-6 flex justify-between items-center">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">Meus Pedidos</h1>
+        <p class="text-gray-500 mt-1">Lista completa dos seus pedidos</p>
+      </div>
+      <button 
+        @click="showOrderForm = true"
+        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors flex items-center"
+      >
+        <PlusIcon class="h-5 w-5 mr-2" />
+        Novo Pedido
+      </button>
     </div>
 
   <div v-if="loading" class="space-y-4">
@@ -13,17 +22,22 @@
     </div>
   </div>
 
-  <div v-else-if="error" class="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+  <div v-else-if="error" class="bg-red-50 border-l-4 border-red-400 p-4 rounded-r">
     <div class="flex">
       <div class="flex-shrink-0">
-        <ExclamationCircleIcon class="h-5 w-5 text-red-400" aria-hidden="true" />
+        <ExclamationTriangleIcon class="h-5 w-5 text-red-400" aria-hidden="true" />
       </div>
       <div class="ml-3">
-        <p class="text-sm text-red-700">
-          {{ error }}
-        </p>
+        <h3 class="text-sm font-medium text-red-800">Erro ao carregar pedidos</h3>
+        <p class="mt-1 text-sm text-red-700">{{ error }}</p>
       </div>
     </div>
+  </div>
+
+  <div v-else-if="orders.length === 0" class="text-center py-16 bg-white rounded-lg shadow-sm">
+    <ShoppingBagIcon class="mx-auto h-16 w-16 text-gray-300" />
+    <h3 class="mt-4 text-lg font-medium text-gray-900">Nenhum pedido encontrado</h3>
+    <p class="mt-2 text-sm text-gray-500">Quando você tiver pedidos, eles aparecerão aqui.</p>
   </div>
 
   <div v-else class="space-y-4">
@@ -35,17 +49,54 @@
     />
   </div>
   </div>
+
+  <!-- Order Form Modal -->
+  <OrderForm 
+    v-if="showOrderForm" 
+    :order="editingOrder"
+    :loading="formLoading"
+    @close="closeOrderForm" 
+    @submit="handleOrderSubmit"
+  />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useOrders } from '../services/OrderService'
+import { useOrders } from '../composables/useOrders'
 import OrderListItem from '../components/OrderListItem.vue'
-import { ExclamationCircleIcon } from '@heroicons/vue/24/outline'
+import OrderForm from '../components/OrderForm.vue'
+import { ExclamationCircleIcon, PlusIcon } from '@heroicons/vue/24/outline'
 
-const { orders, loading, error, fetchOrders } = useOrders()
+const { orders, loading, error, fetchOrders, addOrder, updateOrder } = useOrders()
+
+const showOrderForm = ref(false)
+const editingOrder = ref(null)
+const formLoading = ref(false)
 
 onMounted(async () => {
   await fetchOrders()
 })
+
+const closeOrderForm = () => {
+  showOrderForm.value = false
+  editingOrder.value = null
+}
+
+const handleOrderSubmit = async (orderData) => {
+  try {
+    formLoading.value = true
+    
+    if (editingOrder.value) {
+      await updateOrder(editingOrder.value.id, orderData)
+    } else {
+      addOrder(orderData)
+    }
+    
+    closeOrderForm()
+  } catch (err) {
+    console.error('Erro ao salvar pedido:', err)
+  } finally {
+    formLoading.value = false
+  }
+}
 </script>
