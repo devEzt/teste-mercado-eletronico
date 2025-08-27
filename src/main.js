@@ -4,7 +4,6 @@ import App from './App.vue'
 import './index.css'
 import { i18n } from './i18n/index.js'
 
-// Import components
 import Dashboard from './views/Dashboard.vue'
 import Orders from './views/Orders.vue'
 import OrderDetails from './views/OrderDetails.vue'
