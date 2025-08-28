@@ -1,103 +1,187 @@
-# Order Manager
+<img src="https://cdn.me.com.br/logos/me_primary.png" alt="ME">
 
-A Vue 3 application for managing orders, built with modern web technologies.
+# Teste Técnico - Front-end Challenge
 
-## Features
+Sistema de gerenciamento de pedidos desenvolvido como parte do teste técnico para desenvolvedor front-end. 🚀
 
-- **Dashboard**: Overview of orders with key metrics
-- **Order List**: View all orders in a sortable and filterable table
-- **Order Details**: Detailed view of individual orders
-- **Responsive Design**: Works on desktop and mobile devices
-- **Dark Mode**: Built-in support for dark mode
+**🌐 Demo:** [https://teste-mercado-eletronico.vercel.app/](https://teste-mercado-eletronico.vercel.app/orders)
 
-## Technologies Used
+---
 
-- Vue 3 (Composition API)
-- Vue Router
-- Tailwind CSS
-- Heroicons
-- Lucide Icons
-- Vite
-- Axios
+## ⚡ O Projeto
 
-## Prerequisites
+Aplicação Vue 3 que implementa uma **página de detalhes de pedidos** seguindo layout específico, consumindo dados da API do Mercado Eletrônico.
 
-- Node.js 16+ and npm 8+
+### 📱 Funcionalidades Implementadas
 
-## Project Setup
+- **Dashboard**: Visão geral dos pedidos com métricas principais
+- **Lista de Pedidos**: Visualização de todos os pedidos com filtros
+- **Detalhes do Pedido**: Página completa com informações detalhadas
+- **Design Responsivo**: Adaptação para diferentes tamanhos de tela
+- **Internacionalização**: Suporte a múltiplos idiomas (PT/EN)
+- **Interface Moderna**: UI clean com Tailwind CSS
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/order-manager.git
-   cd order-manager
-   ```
+---
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+## 🛠️ Tecnologias Utilizadas
 
-3. **Environment Setup**
-   Create a `.env` file in the root directory:
-   ```
-   VITE_API_BASE_URL=https://api.mercadoe.space
-   ```
+### Core
 
-## Available Scripts
+- **Vue 3** - Framework principal (Composition API)
+- **Vue Router** - Roteamento SPA
+- **Vue I18n** - Internacionalização
+- **Vite** - Build tool e dev server
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build locally
-- `npm run test:unit` - Run unit tests
-- `npm run test:e2e` - Run end-to-end tests
-- `npm run lint` - Lint and fix files
+### UI/UX
 
-## Project Structure
+- **Tailwind CSS** - Framework CSS utilitário
+- **Heroicons** - Ícones SVG
+- **Lucide Vue** - Biblioteca de ícones adicional
+- **@tailwindcss/forms** - Estilos para formulários
+
+### HTTP & API
+
+- **Axios** - Cliente HTTP para requisições à API
+
+### Testes
+
+- **Vitest** - Framework de testes unitários
+- **@vue/test-utils** - Utilitários para testes Vue
+- **Cypress** - Testes end-to-end
+- **JSDOM** - Ambiente DOM para testes
+
+### Qualidade de Código
+
+- **ESLint** - Linting JavaScript/Vue
+- **Commitizen** - Padronização de commits
+
+---
+
+## 🧩 Componentes Desenvolvidos
+
+### **Componentes Principais**
+
+- **`Layout.vue`** - Layout base da aplicação
+- **`DashboardCard.vue`** - Cards informativos do dashboard
+- **`OrderForm.vue`** - Formulário de pedidos
+- **`OrderListItem.vue`** - Item da lista de pedidos
+- **`LocaleSwitcher.vue`** - Seletor de idiomas
+
+### **Componentes de Pedido**
+
+- **`OrderHeader.vue`** - Cabeçalho com informações do pedido
+- **`AddressCard.vue`** - Card individual de endereço
+- **`AddressesSection.vue`** - Seção completa de endereços
+- **`SupplierInfo.vue`** - Informações do fornecedor
+
+### **Composables**
+
+- **`useOrders.js`** - Lógica reativa para gerenciamento de pedidos
+
+---
+
+## 📋 Como Executar
+
+### Pré-requisitos
+
+- Node.js 16+ e npm 8+
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/devEzt/teste-mercado-eletronico
+cd teste-mercado-eletronico
+
+# Instale as dependências
+npm install
+
+# Execute em modo desenvolvimento
+npm run dev
+```
+
+### Scripts ativos
+
+```bash
+npm run dev          # Inicia o servidor de desenvolvimento
+npm run build        # Inicia script de Build
+npm run preview      # Preview do build local
+npm run test:unit    # Testes unitários (Vitest)
+npm run test:e2e     # Testes e2e (Cypress)
+```
+
+---
+
+## 🧪 Testes Implementados
+
+### **Testes Unitários (Vitest)**
+
+Localizados em `src/tests/`, cobrindo:
+
+- **Componentes**: Testes de renderização e comportamento
+- **Composables**: Testes de lógica reativa
+- **Views**: Testes das páginas principais
+
+### **Testes End-to-End (Cypress)**
+
+Localizados em `cypress/e2e/`:
+
+- **`smoke.cy.js`** - Testes básicos de funcionalidade
+- **`create-order.cy.js`** - Fluxo completo de criação de pedidos
+
+---
+
+## 🏗️ Estrutura do Projeto
 
 ```
 src/
-├── assets/           # Static assets
-├── components/       # Reusable components
-│   ├── common/       # Common UI components
-│   └── order/        # Order-related components
-├── composables/      # Composable functions
-├── router/           # Vue Router configuration
-├── services/         # API services
-├── stores/           # Pinia stores
-├── utils/            # Utility functions
-└── views/            # Page components
+├── components/           # Componentes reutilizáveis
+│   ├── order/           # Componentes específicos de pedidos
+│   ├── DashboardCard.vue
+│   ├── Layout.vue
+│   └── [outros...]
+├── composables/         # Composables Vue
+├── i18n/               # Configuração de internacionalização
+├── tests/              # Testes unitários
+│   ├── components/
+│   ├── composables/
+│   └── views/
+└── views/              # Páginas da aplicação
+
+cypress/
+├── e2e/                # Testes end-to-end
+└── support/            # Configurações do Cypress
 ```
 
-## API Integration
+---
 
-The application fetches order data from the Mercado Eletrônico API. The base URL can be configured in the `.env` file.
+## 🎥 Demonstração em Vídeo
 
-## Deployment
+_[Seção reservada para link do vídeo de demonstração]_
 
-### Vercel
+---
 
-1. Install Vercel CLI: `npm install -g vercel`
-2. Run `vercel` and follow the prompts
+## 🚀 Deploy
 
-### Netlify
+Aplicação deployada na **Vercel**:
 
-1. Install Netlify CLI: `npm install -g netlify-cli`
-2. Run `netlify deploy`
+- **URL de Produção**: [https://teste-mercado-eletronico.vercel.app/](https://teste-mercado-eletronico.vercel.app/orders)
+- **Configuração** via `vercel.json`
 
-## Contributing
+---
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 📡 API Integration
 
-## License
+Consome dados da API oficial:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- **Endpoint**: `GET https://api.mercadoe.space/orders/1`
+- **Tratamento de erros** e estados de loading implementados
+- **Interface reativa** com Vue 3 Composition API
 
-## Acknowledgments
+---
 
-- [Vue.js](https://vuejs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Vite](https://vitejs.dev/)
+## 👨‍💻 Autor
+
+Desenvolvido por Alexandre Maciel.
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Alexandre-blue.svg)](https://www.linkedin.com/in/alexandreh-maciel/)
