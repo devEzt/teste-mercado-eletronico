@@ -12,6 +12,14 @@ Sistema de gerenciamento de pedidos desenvolvido como parte do teste técnico pa
 
 Aplicação Vue 3 que implementa uma **página de detalhes de pedidos** seguindo layout específico, consumindo dados da API do Mercado Eletrônico.
 
+---
+
+## 🎥 Demonstração em Vídeo
+
+- [https://youtu.be/DK6IKtUF3m4](https://youtu.be/DK6IKtUF3m4)
+
+---
+
 ### 📱 Funcionalidades Implementadas
 
 - **Dashboard**: Visão geral dos pedidos com métricas principais
@@ -152,12 +160,6 @@ cypress/
 ├── e2e/                # Testes end-to-end
 └── support/            # Configurações do Cypress
 ```
-
----
-
-## 🎥 Demonstração em Vídeo
-
-_[Seção reservada para link do vídeo de demonstração]_
 
 ---
 
